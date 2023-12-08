@@ -6,11 +6,21 @@
     ref from  rs-esp32s3-slint-st7789-demo
 
 - prepare tools
-	install espflash
-    ~~~shell
-	cargo install espflash
-    ~~~
+	
+  installing the Rust Compiler Target
+	
+  The compilation target for this device is officially supported by the mainline Rust compiler and can be installed using [rustup](https://rustup.rs/):
 
+	```
+	rustup target add riscv32imc-unknown-none-elf
+	```
+	
+	install espflash
+	
+	  ~~~shell
+	cargo install espflash
+	  ~~~
+	
 - build
 
     ~~~shell
@@ -21,7 +31,7 @@
     ~~~shell
     windows:
         espflash.exe flash .\target\riscv32imc-unknown-none-elf\release\rs-esp32c3-no-std-st7789-demo --monitor
-
+    
     Linux:
         espflash flash ./target/riscv32imc-unknown-none-elf/release/rs-esp32c3-no-std-st7789-demo --monitor
     ~~~
