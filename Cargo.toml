@@ -1,0 +1,50 @@
+[package]
+name = "rs-esp32c3-no-std-st7789-demo"
+version = "0.1.0"
+authors = ["zrz4066 <zrz4066@qq.com>"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+build = "build.rs"
+
+[dependencies]
+hal = {package = "esp32c3-hal", version = "0.13.0"}
+esp-backtrace = { version = "0.9.0", features = ["esp32c3", "panic-handler", "exception-handler", "print-uart"] }
+esp-println = { version = "0.7", features = ["esp32c3","log"] }
+log = { version = "0.4.20" }
+esp-alloc = { version = "0.3.0" }
+embedded-hal = "0.2.7"
+embedded-graphics-core = "0.4.0"
+embedded-graphics = "0.8.1" 
+embedded-graphics-framebuf = "0.5.0"
+display-interface = "0.4"
+
+display-interface-spi = "0.4"
+mipidsi = "0.7.1"
+# slint = { git = "https://githubfast.com/slint-ui/slint", default-features = false, features = ["compat-1-2","unsafe-single-threaded","libm","renderer-software"] }
+slint = {version = "*", default-features = false, features = ["compat-1-2","unsafe-single-threaded","libm","renderer-software"] }
+critical-section="1.1.2"
+#for esp wifi
+# esp-wifi= { version = "0.1.1",features = ["esp32c3", "wifi-logs", "wifi"] }#compile error 
+# esp-wifi= {git="https://github.com/zrz4066/esp-wifi.git",features = ["esp32c3", "wifi-logs", "wifi"] }
+# # esp-wifi= {path = "../esp-wifi/esp-wifi",features = ["esp32c3", "wifi-logs", "wifi"] }
+# smoltcp = { version = "0.10.0", default-features=false, features = ["proto-igmp", "proto-ipv4", "socket-tcp", "socket-icmp", "socket-udp", "medium-ethernet", "proto-dhcpv4", "socket-raw", "socket-dhcpv4"] }
+# embedded-svc = { version = "0.26.4",  default-features = false }
+# embedded-io = "0.6.1" #compile error
+# toml-cfg = "0.1.3"
+# heapless="0.7"
+
+[build-dependencies]
+slint-build ={ git = "https://githubfast.com/slint-ui/slint" }
+
+
+# - `0`: no optimizations, build quickly and improve debuggability.
+# - `1`: some optimizations, but retain build speed and debuggability.
+# - `2`: all safe optimizations, some may affect debuggability.
+# - `3`: all optimizations, may significantly affect debuggability.
+# - `"s"`: optimize for size, may significantly affect debuggability and speed.
+# - `"z"`: optimize for size, but also turn off loop vectorization.
+[profile.release]
+# or "z"
+opt-level = 3
+# debug = false
+lto = true
